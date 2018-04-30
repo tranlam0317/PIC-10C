@@ -121,3 +121,16 @@ namespace Pic10b {
 
         return *this;
     }
+
+
+    template <typename ItemType>
+    ItemType& vector<ItemType>:: operator[] (size_t index){
+        return the_data[index]; // return *(the_data + index)
+    }
+
+    template <typename ItemType>
+    ItemType vector<ItemType>:: operator[] (size_t index) const{
+        return the_data[index]; // return *(the_data + index)
+    }
+
+    
