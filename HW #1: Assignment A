@@ -53,3 +53,16 @@ namespace Pic10b {
         int compare (const vector& ) const;
 
     }; // end Pic10b::vector
+
+    //Non-member functions
+
+    template <typename ItemType>
+    std:: ostream& operator<< (std::ostream&, const vector<ItemType>&);
+
+    //multiplcation w/ an integer such as v1 = ( 2 * v2 ) * 3;
+    template <typename ItemType>
+    vector<ItemType> operator*(const ItemType, const vector<ItemType>&);
+
+    //scalar multiplication is symmetric
+    template <typename ItemType>
+    vector<ItemType> operator*(const vector<ItemType>&, const ItemType);
