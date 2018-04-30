@@ -215,7 +215,6 @@ namespace Pic10b {
         return std::sqrt ((*this) * (*this) - b * b); //HOW DID THIS WORK AGAIN?
     }
 
-
     template <typename ItemType>
     bool vector<ItemType>::operator< (const vector<ItemType>& b) const {
         return compare(b) < 0;
@@ -290,7 +289,6 @@ namespace Pic10b {
         return out;
     }
 
-
     vector<string> operator*(const string c, const vector<string>& v ){
         vector<string> temp(v); // because I don't want to modify the original vector
         for (int i = 0; i < temp.size(); i++)
@@ -304,6 +302,5 @@ namespace Pic10b {
             temp[i] = v[i] + " " + c;
         return temp;
     }
-
 
 } // end Pic10b namespace
