@@ -243,6 +243,7 @@ namespace Pic10b {
         return !(*this==b); // not(the sizes are equal)
     }
 
+/***********NON-MEMBER FUNCTION IMPLEMENTATION***********/
 
     template <typename ItemType>
     vector<ItemType> operator*(const ItemType n, const vector<ItemType>& v ){
