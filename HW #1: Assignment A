@@ -182,3 +182,9 @@ namespace Pic10b {
             c[i] = the_data[i] + rhs[i];
         return c;
     }
+
+    template <typename ItemType> // DOES THIS WORK???
+    vector<ItemType>& vector<ItemType>::operator+= (const vector<ItemType>& rhs){
+        *this = *this + rhs;
+        return *this;
+    }
