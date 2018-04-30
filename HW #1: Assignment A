@@ -122,7 +122,8 @@ namespace Pic10b {
         return *this;
     }
 
-
+    //Other member functions
+    
     template <typename ItemType>
     ItemType& vector<ItemType>:: operator[] (size_t index){
         return the_data[index]; // return *(the_data + index)
