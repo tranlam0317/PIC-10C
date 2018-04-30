@@ -103,3 +103,21 @@ namespace Pic10b {
         for (int i = 0; i < the_size; ++i)
             the_data[i] = source.the_data[i]; // *(the_data + i) = * (source.the_data + i);
     }
+
+    //Assignment operator
+    template <typename ItemType>
+    vector<ItemType>& vector<ItemType>:: operator=(const vector<ItemType>& rhs){
+        std::cout << "xxxxxxxxxx Assignment Operator called\n";
+        if (this!= &rhs) {// self assignment
+            delete [] the_data;
+            the_data = new ItemType[rhs.the_capacity];
+
+            the_size = rhs.the_size;
+            the_capacity = rhs.the_capacity;
+            
+            for (int i = 0; i <the_size; ++i)
+                the_data[i] = rhs.the_data[i]; // *(the_data + i) = * (rhs.the_data + i);
+        }
+
+        return *this;
+    }
