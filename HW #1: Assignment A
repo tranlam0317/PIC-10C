@@ -68,7 +68,7 @@ namespace Pic10b {
     vector<ItemType> operator*(const vector<ItemType>&, const ItemType);
     
     
-    
+/***********IMPLEMENTATION***********/
     
     //Default Constructor
     template <typename ItemType>
