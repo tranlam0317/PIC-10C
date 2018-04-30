@@ -246,6 +246,17 @@ namespace Pic10b {
 /***********NON-MEMBER FUNCTION IMPLEMENTATION***********/
 
     template <typename ItemType>
+    std:: ostream& operator<< (std::ostream& out, const vector<ItemType>&v){
+        out << "{";
+//        for (size_t i = 0; i < v.size(); i++)
+        for (size_t i = 0; i < v.size() -1; i++)
+            out << v[i] << ", ";
+//        out << "}";
+        out << v[v.size() - 1] << "}";
+        return out;
+    }
+    
+    template <typename ItemType>
     vector<ItemType> operator*(const ItemType n, const vector<ItemType>& v ){
         vector<ItemType> temp(v); // because I don't want to modify the original vector
         for (int i = 0; i < temp.size(); i++)
