@@ -276,5 +276,20 @@ namespace Pic10b {
             temp[i] = v[i] * n;
         return temp;
     }
+    
+    vector<string> operator*(const string c, const vector<string>& v ){
+        vector<string> temp(v); // because I don't want to modify the original vector
+        for (int i = 0; i < temp.size(); i++)
+            temp[i] = c + " " + v[i];
+        return temp;
+    }
+    
+    vector<string> operator*(const vector<string>& v, const string c){ // using the & will modify the vector
+        vector<string> temp(v); // because I don't want to modify the original vector
+        for (int i = 0; i < temp.size(); i++)
+            temp[i] = v[i] + " " + c;
+        return temp;
+    }
+
 
 } // end Pic10b namespace
