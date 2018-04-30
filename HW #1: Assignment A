@@ -1,0 +1,7 @@
+#include <iostream>          // std::cout
+#include <string>            // std::string
+#include <cmath>             // sqrt(...)
+
+using std::cout;
+using std::string;
+using std::sqrt;
