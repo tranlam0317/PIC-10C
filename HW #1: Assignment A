@@ -160,3 +160,17 @@ namespace Pic10b {
         the_data[the_size++] = new_value;
     }
     
+    template <typename ItemType>
+    size_t vector<ItemType>:: size() const {
+        return the_size;
+    }
+    
+    template <typename ItemType>
+    size_t vector<ItemType>:: capacity() const {
+        return the_capacity;
+    }
+    
+    template <typename ItemType>
+    bool vector<ItemType>:: empty () const {
+        return the_size == 0;
+    }
