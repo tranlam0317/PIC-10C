@@ -1,0 +1,155 @@
+#include <iostream>          // std::cout
+#include <string>            // std::string
+#include <cmath>             // sqrt(...)
+
+using std::cout;
+using std::string;
+using std::sqrt;
+
+namespace Pic10b {
+
+    template <typename ItemType>
+    class vector {
+    public:
+        //Big 4
+        vector();
+        ~vector();
+        vector (const vector& );
+        vector& operator=(const vector&);
+
+        // Other member functions
+        ItemType& operator[] (size_t index);
+        ItemType operator[] (size_t index) const;
+        void push_back (ItemType new_value);
+        size_t size() const;
+        size_t capacity() const;
+        bool empty() const;
+
+        //Overloaded operators
+        vector operator+(const vector&) const;
+        vector& operator+=(const vector&);
+        ItemType operator*(const vector&) const; // calls the member f(x)
+            // ItemType b/c you're bringing in the values of vectors and multiplying them
+            // the lhs becomes this
+
+        //Relational Operators
+        bool operator<(const vector&)const;
+        bool operator<=(const vector&)const;
+        bool operator>(const vector&)const;
+        bool operator>=(const vector&)const;
+        bool operator==(const vector&)const;
+        bool operator!=(const vector&)const;
+
+    private:
+        ItemType* the_data;
+        size_t the_size;
+        size_t the_capacity;
+
+        static const int INIT_CAP = 10;
+
+        void reserve (size_t new_capacity);
+
+        //comparing the size of the vectors
+        int compare (const vector& ) const;
+
+    }; // end Pic10b::vector
+
+    //Non-member functions
+
+    template <typename ItemType>
+    std:: ostream& operator<< (std::ostream&, const vector<ItemType>&);
+
+    //multiplcation w/ an integer such as v1 = ( 2 * v2 ) * 3;
+    template <typename ItemType>
+    vector<ItemType> operator*(const ItemType, const vector<ItemType>&);
+
+    //scalar multiplication is symmetric
+    template <typename ItemType>
+    vector<ItemType> operator*(const vector<ItemType>&, const ItemType);
+    
+    
+/***********IMPLEMENTATION***********/
+    
+    //Default Constructor
+    template <typename ItemType>
+    vector<ItemType>:: vector(){
+        std::cout << "xxxxxxxxxx Default Constructor called\n";
+        the_data = nullptr; // nullptr is for overloading a pointer b/c setting it to NULL would select int
+            // the_data is a pointer variable
+        the_size = 0;
+        the_capacity = INIT_CAP;
+
+        the_data = new ItemType[the_capacity];
+    }
+    
+    //Deconstructor
+    template <typename ItemType>
+    vector<ItemType>:: ~vector(){
+        std::cout << "xxxxxxxxxx Destructor called\n";
+        delete[] the_data; // using delete [] deallocates the dynamically allocated block of memory (array) pointed to by the_data (the pointer variable)
+    }
+    
+        //Copy constructor
+    template <typename ItemType>
+    vector<ItemType>:: vector (const vector& source){
+        std::cout << "xxxxxxxxxx Copy Constructor called\n";
+        the_data = nullptr;
+
+        the_size = source.the_size;
+        the_capacity = source.the_capacity;
+
+        the_data = new ItemType[the_capacity];
+
+        for (int i = 0; i < the_size; ++i)
+            the_data[i] = source.the_data[i]; // *(the_data + i) = * (source.the_data + i);
+    }
+
+    //Assignment operator
+    template <typename ItemType>
+    vector<ItemType>& vector<ItemType>:: operator=(const vector<ItemType>& rhs){
+        std::cout << "xxxxxxxxxx Assignment Operator called\n";
+        if (this!= &rhs) {// self assignment
+            delete [] the_data;
+            the_data = new ItemType[rhs.the_capacity];
+
+            the_size = rhs.the_size;
+            the_capacity = rhs.the_capacity;
+            
+            for (int i = 0; i <the_size; ++i)
+                the_data[i] = rhs.the_data[i]; // *(the_data + i) = * (rhs.the_data + i);
+        }
+
+        return *this;
+    }
+
+    //Other member functions
+    
+    template <typename ItemType>
+    ItemType& vector<ItemType>:: operator[] (size_t index){
+        return the_data[index]; // return *(the_data + index)
+    }
+
+    template <typename ItemType>
+    ItemType vector<ItemType>:: operator[] (size_t index) const{
+        return the_data[index]; // return *(the_data + index)
+    }
+
+    template <typename ItemType>
+    void vector<ItemType>:: reserve(size_t new_capacity) {
+        if (new_capacity > the_capacity) {
+            if (new_capacity <= 2 * the_capacity)
+                new_capacity = 2 * the_capacity;
+
+            ItemType* old_location = the_data;
+
+            the_data = new ItemType[new_capacity];
+            the_capacity = new_capacity;
+
+            for ( size_t i = 0; i < the_size; ++i)
+                the_data[i] = old_location [i];
+
+            delete[] old_location;
+        }
+    }
+
+    
