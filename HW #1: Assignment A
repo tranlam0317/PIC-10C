@@ -66,3 +66,18 @@ namespace Pic10b {
     //scalar multiplication is symmetric
     template <typename ItemType>
     vector<ItemType> operator*(const vector<ItemType>&, const ItemType);
+    
+    
+    
+    
+    //Default Constructor
+    template <typename ItemType>
+    vector<ItemType>:: vector(){
+        std::cout << "xxxxxxxxxx Default Constructor called\n";
+        the_data = nullptr; // nullptr is for overloading a pointer b/c setting it to NULL would select int
+            // the_data is a pointer variable
+        the_size = 0;
+        the_capacity = INIT_CAP;
+
+        the_data = new ItemType[the_capacity];
+    }
