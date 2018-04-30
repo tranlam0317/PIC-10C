@@ -81,3 +81,10 @@ namespace Pic10b {
 
         the_data = new ItemType[the_capacity];
     }
+    
+    //Deconstructor
+    template <typename ItemType>
+    vector<ItemType>:: ~vector(){
+        std::cout << "xxxxxxxxxx Destructor called\n";
+        delete[] the_data; // using delete [] deallocates the dynamically allocated block of memory (array) pointed to by the_data (the pointer variable)
+    }
