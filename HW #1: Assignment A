@@ -152,4 +152,11 @@ namespace Pic10b {
         }
     }
 
+    template <typename ItemType>
+    void vector<ItemType>:: push_back (ItemType new_value) {
+        if (the_size == the_capacity) {
+            reserve (the_capacity++); }
+
+        the_data[the_size++] = new_value;
+    }
     
