@@ -195,8 +195,6 @@ namespace Pic10b {
         for (int i = 0; i < rhs.the_size; ++i) {
             sum+= the_data[i] * rhs[i];
             
-//          sum = the_data[i] * rhs[i]; // DOESN'T WORK
-//          sum += sum ; //just overiding the sum instead of incrementing it
         }
         return sum;
     }
