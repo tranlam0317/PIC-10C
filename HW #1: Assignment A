@@ -203,3 +203,24 @@ namespace Pic10b {
     int vector<ItemType>:: compare (const vector<ItemType>& b) const {
         return std::sqrt ((*this) * (*this) - b * b); //HOW DID THIS WORK AGAIN?
     }
+
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator< (const vector<ItemType>& b) const {
+        return compare(b) < 0;
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator<= (const vector<ItemType>& b) const {
+        return compare(b) <= 0;
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator> (const vector<ItemType>& b) const {
+        return compare(b) > 0;
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator>= (const vector<ItemType>& b) const {
+        return compare(b) >= 0;
+    }
