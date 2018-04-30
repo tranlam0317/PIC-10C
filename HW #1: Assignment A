@@ -188,3 +188,15 @@ namespace Pic10b {
         *this = *this + rhs;
         return *this;
     }
+    
+    template <typename ItemType>
+    ItemType vector<ItemType>::operator*(const vector<ItemType>& rhs) const{
+        ItemType sum = 0;
+        for (int i = 0; i < rhs.the_size; ++i) {
+            sum+= the_data[i] * rhs[i];
+            
+//          sum = the_data[i] * rhs[i]; // DOESN'T WORK
+//          sum += sum ; //just overiding the sum instead of incrementing it
+        }
+        return sum;
+    }
