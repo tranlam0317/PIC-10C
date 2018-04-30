@@ -67,6 +67,13 @@ namespace Pic10b {
     template <typename ItemType>
     vector<ItemType> operator*(const vector<ItemType>&, const ItemType);
     
+    //Strings
+    std:: ostream& operator<< (std::ostream&, const vector<string>&);
+
+    vector<string> operator*(const string, const vector<string>&);
+
+    vector<string> operator*(const vector<string>&, const string);
+    
     
 /***********IMPLEMENTATION***********/
     
@@ -89,7 +96,7 @@ namespace Pic10b {
         delete[] the_data; // using delete [] deallocates the dynamically allocated block of memory (array) pointed to by the_data (the pointer variable)
     }
     
-        //Copy constructor
+    //Copy constructor
     template <typename ItemType>
     vector<ItemType>:: vector (const vector& source){
         std::cout << "xxxxxxxxxx Copy Constructor called\n";
