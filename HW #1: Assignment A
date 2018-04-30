@@ -174,3 +174,11 @@ namespace Pic10b {
     bool vector<ItemType>:: empty () const {
         return the_size == 0;
     }
+    
+    template <typename ItemType>
+    vector<ItemType> vector<ItemType>::operator+(const vector<ItemType>& rhs) const{
+        vector<ItemType> c(rhs); // WHY IS THERE A TEMP VECTOR?
+        for (int i = 0; i < c.size(); i++)
+            c[i] = the_data[i] + rhs[i];
+        return c;
+    }
