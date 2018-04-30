@@ -5,3 +5,51 @@
 using std::cout;
 using std::string;
 using std::sqrt;
+
+namespace Pic10b {
+
+    template <typename ItemType>
+    class vector {
+    public:
+        //Big 4
+        vector();
+        ~vector();
+        vector (const vector& );
+        vector& operator=(const vector&);
+
+        // Other member functions
+        ItemType& operator[] (size_t index);
+        ItemType operator[] (size_t index) const;
+        void push_back (ItemType new_value);
+        size_t size() const;
+        size_t capacity() const;
+        bool empty() const;
+
+        //Overloaded operators
+        vector operator+(const vector&) const;
+        vector& operator+=(const vector&);
+        ItemType operator*(const vector&) const; // calls the member f(x)
+            // ItemType b/c you're bringing in the values of vectors and multiplying them
+            // the lhs becomes this
+
+        //Relational Operators
+        bool operator<(const vector&)const;
+        bool operator<=(const vector&)const;
+        bool operator>(const vector&)const;
+        bool operator>=(const vector&)const;
+        bool operator==(const vector&)const;
+        bool operator!=(const vector&)const;
+
+    private:
+        ItemType* the_data;
+        size_t the_size;
+        size_t the_capacity;
+
+        static const int INIT_CAP = 10;
+
+        void reserve (size_t new_capacity);
+
+        //comparing the size of the vectors
+        int compare (const vector& ) const;
+
+    }; // end Pic10b::vector
