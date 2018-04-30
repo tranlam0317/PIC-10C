@@ -88,3 +88,25 @@ namespace Pic10b {
         std::cout << "xxxxxxxxxx Destructor called\n";
         delete[] the_data; // using delete [] deallocates the dynamically allocated block of memory (array) pointed to by the_data (the pointer variable)
     }
+    
+        //Copy constructor
+    template <typename ItemType>
+    vector<ItemType>:: vector (const vector& source){
+        std::cout << "xxxxxxxxxx Copy Constructor called\n";
+        the_data = nullptr;
+        
+//        the_data = new ItemType[source.the_capacity];
+//        for ( int i = 0; i < source.the_size; i++) {
+//            the_data[i] = source.the_data[i];
+//        }
+//        the_size = source.the_size;
+//        the_capacity = source.the_capacity;
+//
+        the_size = source.the_size;
+        the_capacity = source.the_capacity;
+
+        the_data = new ItemType[the_capacity];
+
+        for (int i = 0; i < the_size; ++i)
+            the_data[i] = source.the_data[i]; // *(the_data + i) = * (source.the_data + i);
+    }
