@@ -242,3 +242,6 @@ namespace Pic10b {
     bool vector<ItemType>::operator!= (const vector<ItemType>& b) const {
         return !(*this==b); // not(the sizes are equal)
     }
+
+
+} // end Pic10b namespace
