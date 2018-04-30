@@ -1,3 +1,7 @@
+// File: pic10b_vector.h
+// Author: Tran Lam
+// Template functions, template classes, and specialized templates.
+
 #include <iostream>          // std::cout
 #include <string>            // std::string
 #include <cmath>             // sqrt(...)
@@ -67,6 +71,13 @@ namespace Pic10b {
     template <typename ItemType>
     vector<ItemType> operator*(const vector<ItemType>&, const ItemType);
     
+    //Strings
+    std:: ostream& operator<< (std::ostream&, const vector<string>&);
+
+    vector<string> operator*(const string, const vector<string>&);
+
+    vector<string> operator*(const vector<string>&, const string);
+    
     
 /***********IMPLEMENTATION***********/
     
@@ -89,7 +100,7 @@ namespace Pic10b {
         delete[] the_data; // using delete [] deallocates the dynamically allocated block of memory (array) pointed to by the_data (the pointer variable)
     }
     
-        //Copy constructor
+    //Copy constructor
     template <typename ItemType>
     vector<ItemType>:: vector (const vector& source){
         std::cout << "xxxxxxxxxx Copy Constructor called\n";
@@ -152,4 +163,144 @@ namespace Pic10b {
         }
     }
 
+    template <typename ItemType>
+    void vector<ItemType>:: push_back (ItemType new_value) {
+        if (the_size == the_capacity) {
+            reserve (the_capacity++); }
+
+        the_data[the_size++] = new_value;
+    }
     
+    template <typename ItemType>
+    size_t vector<ItemType>:: size() const {
+        return the_size;
+    }
+    
+    template <typename ItemType>
+    size_t vector<ItemType>:: capacity() const {
+        return the_capacity;
+    }
+    
+    template <typename ItemType>
+    bool vector<ItemType>:: empty () const {
+        return the_size == 0;
+    }
+    
+    template <typename ItemType>
+    vector<ItemType> vector<ItemType>::operator+(const vector<ItemType>& rhs) const{
+        vector<ItemType> c(rhs); // WHY IS THERE A TEMP VECTOR?
+        for (int i = 0; i < c.size(); i++)
+            c[i] = the_data[i] + rhs[i];
+        return c;
+    }
+
+    template <typename ItemType> // DOES THIS WORK???
+    vector<ItemType>& vector<ItemType>::operator+= (const vector<ItemType>& rhs){
+        *this = *this + rhs;
+        return *this;
+    }
+    
+    template <typename ItemType>
+    ItemType vector<ItemType>::operator*(const vector<ItemType>& rhs) const{
+        ItemType sum = 0;
+        for (int i = 0; i < rhs.the_size; ++i) {
+            sum+= the_data[i] * rhs[i];
+            
+        }
+        return sum;
+    }
+
+    template <typename ItemType>
+    int vector<ItemType>:: compare (const vector<ItemType>& b) const {
+        return std::sqrt ((*this) * (*this) - b * b); //HOW DID THIS WORK AGAIN?
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator< (const vector<ItemType>& b) const {
+        return compare(b) < 0;
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator<= (const vector<ItemType>& b) const {
+        return compare(b) <= 0;
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator> (const vector<ItemType>& b) const {
+        return compare(b) > 0;
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator>= (const vector<ItemType>& b) const {
+        return compare(b) >= 0;
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator== (const vector<ItemType>& b) const {
+        if (size() != b.size())
+            return false;
+        else {
+            for (int i = 0; i < size(); i++) {
+            if (the_data[i] != b[i]) //comparing each entry
+                return false;
+            }
+            return true; //true if size is the same and all entries match
+        }
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator!= (const vector<ItemType>& b) const {
+        return !(*this==b); // not(the sizes are equal)
+    }
+
+/***********NON-MEMBER FUNCTION IMPLEMENTATION***********/
+
+    template <typename ItemType>
+    std:: ostream& operator<< (std::ostream& out, const vector<ItemType>&v){
+        out << "{";
+        for (size_t i = 0; i < v.size() -1; i++)
+            out << v[i] << ", ";
+        out << v[v.size() - 1] << "}";
+        return out;
+    }
+    
+    template <typename ItemType>
+    vector<ItemType> operator*(const ItemType n, const vector<ItemType>& v ){
+        vector<ItemType> temp(v); // because I don't want to modify the original vector
+        for (int i = 0; i < temp.size(); i++)
+            temp[i] = n * v[i];
+        return temp;
+    }
+
+    template <typename ItemType>
+    vector<ItemType> operator*(const vector<ItemType>& v, const ItemType n){
+        vector<ItemType> temp (v);
+        for (int i = 0; i < temp.size(); i++)
+            temp[i] = v[i] * n;
+        return temp;
+    }
+    
+    //String     
+    std:: ostream& operator<< (std::ostream& out, const vector<string>&v){
+        out << "[ ";
+        for (size_t i = 0; i < v.size() -1; i++)
+            out << v[i] << ", ";
+        out << v[v.size() - 1] << " ]";
+        return out;
+    }
+
+    vector<string> operator*(const string c, const vector<string>& v ){
+        vector<string> temp(v); // because I don't want to modify the original vector
+        for (int i = 0; i < temp.size(); i++)
+            temp[i] = c + " " + v[i];
+        return temp;
+    }
+    
+    vector<string> operator*(const vector<string>& v, const string c){ // using the & will modify the vector
+        vector<string> temp(v); // because I don't want to modify the original vector
+        for (int i = 0; i < temp.size(); i++)
+            temp[i] = v[i] + " " + c;
+        return temp;
+    }
+
+} // end Pic10b namespace
