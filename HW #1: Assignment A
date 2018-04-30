@@ -198,3 +198,9 @@ namespace Pic10b {
         }
         return sum;
     }
+
+    template <typename ItemType>
+    int vector<ItemType>:: compare (const vector<ItemType>& b) const {
+        return std::sqrt ((*this) * (*this) - b * b); //HOW DID THIS WORK AGAIN?
+        //(*this) * (*this) - b * b; // THIS ALSO WORKS??
+    }
