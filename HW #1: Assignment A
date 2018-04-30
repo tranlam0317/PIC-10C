@@ -248,10 +248,8 @@ namespace Pic10b {
     template <typename ItemType>
     std:: ostream& operator<< (std::ostream& out, const vector<ItemType>&v){
         out << "{";
-//        for (size_t i = 0; i < v.size(); i++)
         for (size_t i = 0; i < v.size() -1; i++)
             out << v[i] << ", ";
-//        out << "}";
         out << v[v.size() - 1] << "}";
         return out;
     }
