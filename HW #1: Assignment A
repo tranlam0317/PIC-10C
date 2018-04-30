@@ -224,3 +224,21 @@ namespace Pic10b {
     bool vector<ItemType>::operator>= (const vector<ItemType>& b) const {
         return compare(b) >= 0;
     }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator== (const vector<ItemType>& b) const {
+        if (size() != b.size())
+            return false;
+        else {
+            for (int i = 0; i < size(); i++) {
+            if (the_data[i] != b[i]) //comparing each entry
+                return false;
+            }
+            return true; //true if size is the same and all entries match
+        }
+    }
+
+    template <typename ItemType>
+    bool vector<ItemType>::operator!= (const vector<ItemType>& b) const {
+        return !(*this==b); // not(the sizes are equal)
+    }
